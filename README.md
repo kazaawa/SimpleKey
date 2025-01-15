@@ -1,1 +1,4 @@
 # SimpleKey
+
+必要最低限の昨日をもって分離型キーボードです。
+ファームウェアの書き込みはsrc内のsimplekeyをqmk_firmware\keyboardsに入れて実行してください。
