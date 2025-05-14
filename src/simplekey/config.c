@@ -9,3 +9,4 @@
 
 #define OLED_DISPLAY_128X64
 #define OLED_FONT_H "simplekey/lib/glcdfont.c"
+#define OLED_TIMEOUT 60000
