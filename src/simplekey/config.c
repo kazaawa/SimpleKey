@@ -7,6 +7,8 @@
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 7
 
+#define SPLIT_TRANSPORT_MIRROR
+
 #define SPLIT_OLED_ENABLE
 #define OLED_DISPLAY_128X64
 #define OLED_FONT_H "simplekey/lib/glcdfont.c"
