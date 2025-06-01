@@ -154,4 +154,20 @@ bool oled_task_user(void) {
     render_logo();
     return false;
 }
+
+void oled_write_host_led_state(void) {
+    const led_t led_state = host_keyboard_led_state();
+    oled_write_P(PSTR("NumL:"), false);
+    oled_write_P(led_state.num_lock ? PSTR("on") : PSTR("- "), false);
+    oled_write_P(PSTR(" CapL:"), false);
+    oled_write_P(led_state.caps_lock ? PSTR("on") : PSTR("- "), false);
+    oled_write_P(PSTR(" SclL:"), false);
+    oled_write_ln_P(led_state.scroll_lock ? PSTR("on") : PSTR("-"), false);
+}
+
+bool oled_task_user(void) {
+    oled_write_host_led_state();
+    return false;
+}
+
 #endif
