@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,------------------------------------------------------------------------------------------.
    * |   F1 |   F2 |   F3 |   F4 |      |                    |    7 |    8 |   9  |    0 |      |
    * |------+------+------+------+------+--------------------+------+------+------+------+------|
-   * |   F5 |   F6 |   F7 |   F8 |      |                    |    4 |    5 |   6  |      |      |
+   * |   F5 |   F6 |   F7 |   F8 |      |                    |    4 |    5 |   6  | NUM |      |
    * |------+------+------+------+------+---------------------------+------+------+------+------|
    * |   F9 |  F10 |  F11 |  F12 |  　  |   [  |      |   ]  |    1 |    2 |   3  |   .  |   /  |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------|
@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   */
   [_RAISE] = LAYOUT(
      KC_F1  , KC_F2  , KC_F3 , KC_F4  , _______,                                 KC_7  , KC_8   ,  KC_9  ,    KC_0,  _______,
-     KC_F5  , KC_F6  , KC_F7 , KC_F8  , _______,                                 KC_4  , KC_5   ,  KC_6  , _______,  _______, 
+     KC_F5  , KC_F6  , KC_F7 , KC_F8  , _______,                                 KC_4  , KC_5   ,  KC_6  ,  KC_NUM,  _______, 
      KC_F9  , KC_F10 , KC_F11, KC_F12 , _______, KC_LBRC,               KC_RBRC, KC_1  , KC_2   ,  KC_3  ,  KC_DOT,  KC_SLSH,
      KC_LSFT, KC_LCTL, KC_TAB, KC_LALT,  RAISE , KC_SPC ,               KC_ENT , LOWER , KC_BSPC,  KC_DEL,    EISU,  KC_MINS
     )
@@ -140,21 +140,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return rotation;
 }
 
-static void render_logo(void) {
-    static const char PROGMEM qmk_logo[] = {
-        0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0x8F, 0x90, 0x91, 0x92, 0x93, 0x94,
-        0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xAB, 0xAC, 0xAD, 0xAE, 0xAF, 0xB0, 0xB1, 0xB2, 0xB3, 0xB4,
-        0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6, 0xC7, 0xC8, 0xC9, 0xCA, 0xCB, 0xCC, 0xCD, 0xCE, 0xCF, 0xD0, 0xD1, 0xD2, 0xD3, 0xD4, 0x00
-    };
-
-    oled_write_P(qmk_logo, false);
-}
-
-bool oled_task_user(void) {
-    render_logo();
-    return false;
-}
-
 void oled_write_host_led_state(void) {
     const led_t led_state = host_keyboard_led_state();
     oled_write_P(PSTR("NumL:"), false);
@@ -167,6 +152,21 @@ void oled_write_host_led_state(void) {
 
 bool oled_task_user(void) {
     oled_write_host_led_state();
+    return false;
+}
+
+static void render_logo(void) {
+    static const char PROGMEM qmk_logo[] = {
+        0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0x8F, 0x90, 0x91, 0x92, 0x93, 0x94,
+        0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xAB, 0xAC, 0xAD, 0xAE, 0xAF, 0xB0, 0xB1, 0xB2, 0xB3, 0xB4,
+        0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6, 0xC7, 0xC8, 0xC9, 0xCA, 0xCB, 0xCC, 0xCD, 0xCE, 0xCF, 0xD0, 0xD1, 0xD2, 0xD3, 0xD4, 0x00
+    };
+
+    oled_write_P(qmk_logo, false);
+}
+
+bool oled_task_user(void) {
+    render_logo();
     return false;
 }
 
